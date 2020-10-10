@@ -4,11 +4,11 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ca478a3fd9633c55beea437f2adc421f71d5dbafcdf78aefe4b95b9c5ad64798
+-- hash: 812febdef6d32574c38c9db0dbf20c73aa365d4a1c808179490a698d2da84d8f
 
 name:           safeboard
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/safeboard#readme>
+description:    Please see the README on GitHub at <https://github.com/neclitoris/safeboard#readme>
 homepage:       https://github.com/neclitoris/safeboard#readme
 bug-reports:    https://github.com/neclitoris/safeboard/issues
 author:         Nikita Solodovnikov
