@@ -34,6 +34,6 @@ Slices:
 ```
 GHCi> let mple = mkSlice 3 4 vec
 GHCi> expr <- runQ $ unTypeQ mple
-GHCi> > putStrLn $ pprint expr
+GHCi> putStrLn $ pprint expr
 Data.Vector.Storable.fromList [109, 112, 108, 101]
 ```
