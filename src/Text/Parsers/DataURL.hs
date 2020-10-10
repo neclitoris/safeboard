@@ -21,7 +21,7 @@ dataURLByte = fromIntegral . fromEnum <$> unreserved <|> encoded
   where
     unreserved = spaces *> noneOf ":/?#[]@!$&\"\"()*+';=%"
     fromHex    = fromIntegral . fst . head . readHex
-    encoded    = fromHex <$> ((spaces *> char '%') *> replicateM 2 (spaces *> hexDigit))
+    encoded    = spaces *> (fromHex <$> (char '%' *> replicateM 2 hexDigit))
 
 dataURL :: forall a . Storable a => Parsec String () (V.Vector a)
 dataURL = V.unsafeCast . V.concat <$> many batch <* spaces <* eof
