@@ -1,8 +1,5 @@
 {-# LANGUAGE ScopedTypeVariables #-}
-module Text.Parsers.Base64
-    ( parseBase64
-    )
-where
+module Text.Parsers.Base64 ( parseBase64 ) where
 
 import Control.Monad (when)
 import Data.Bits
@@ -34,7 +31,7 @@ base64Char =
     where
       chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
       valid = oneOf chars
-      fromChar = Value . fromIntegral . fromJust . (`elemIndex` chars)
+      fromChar = Value . toEnum . fromJust . (`elemIndex` chars)
 
 -- Parse a single byte from base64 string. Abuses parsec user state
 -- to store data needed for next byte. This allows parsing bytes one
@@ -71,6 +68,7 @@ base64 =
   V.unsafeCast . V.concat <$> many batch <* base64Padding <* spaces <* eof
     where batch = V.replicateM len base64Byte <?> printf "%s bytes" (show len)
           len = sizeOf (undefined :: a)
+
 
 parseBase64 :: Storable a => String -> Either ParseError (V.Vector a)
 parseBase64 = runParser base64 def ""

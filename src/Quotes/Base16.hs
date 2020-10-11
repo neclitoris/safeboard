@@ -1,4 +1,4 @@
-{-# LANGUAGE QuasiQuotes, ScopedTypeVariables, TemplateHaskell #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Quotes.Base16 (base16) where
 
 import Data.Vector.Lift
@@ -8,7 +8,7 @@ import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 import Text.Parsers.Base16
 
-base16 :: forall a . (Storable a, Lift a) => String -> TExpQ (V.Vector a)
+base16 :: (Storable a, Lift a) => String -> TExpQ (V.Vector a)
 base16 s =
   case parseBase16 s of
     Left err -> fail (show err)

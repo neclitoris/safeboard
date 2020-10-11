@@ -1,14 +1,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
-module Text.Parsers.DataURL
-    ( parseDataURL
-    )
-where
+module Text.Parsers.DataURL ( parseDataURL ) where
 
 import Control.Monad
-import Data.Bits
-import Data.Char
-import Data.List
-import Data.Maybe (fromJust)
 import qualified Data.Vector.Storable as V
 import Data.Word
 import Foreign.Storable
@@ -21,7 +14,7 @@ dataURLByte = fromIntegral . fromEnum <$> unreserved <|> encoded
   where
     unreserved = spaces *> noneOf ":/?#[]@!$&\"\"()*+';=%"
     fromHex    = fromIntegral . fst . head . readHex
-    encoded    = spaces *> (fromHex <$> (char '%' *> replicateM 2 hexDigit))
+    encoded    = spaces *> char '%' *> (fromHex <$> replicateM 2 hexDigit)
 
 dataURL :: forall a . Storable a => Parsec String () (V.Vector a)
 dataURL = V.unsafeCast . V.concat <$> many batch <* spaces <* eof
