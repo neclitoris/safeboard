@@ -12,4 +12,4 @@ dataURL :: (Storable a, Lift a) => String -> TExpQ (V.Vector a)
 dataURL s =
   case parseDataURL s of
     Left err -> fail (show err)
-    Right vec -> [|| vec ||]
+    Right vec -> vecLift vec
