@@ -17,7 +17,7 @@ dataURLByte = fromIntegral . fromEnum <$> unreserved <|> encoded
     encoded    = spaces *> char '%' *> (fromHex <$> replicateM 2 hexDigit)
 
 dataURL :: forall a . Storable a => Parsec String () (V.Vector a)
-dataURL = V.unsafeCast . V.concat <$> many batch <* spaces <* eof
+dataURL = V.unsafeCast . V.concat <$> many (try batch) <* spaces <* eof
   where batch = V.replicateM len dataURLByte <?> printf "%s bytes" (show len)
         len = sizeOf (undefined :: a)
 
