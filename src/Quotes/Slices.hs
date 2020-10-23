@@ -8,4 +8,4 @@ import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 
 mkSlice :: (Storable a, Lift a) => Int -> Int -> V.Vector a -> TExpQ (V.Vector a)
-mkSlice i n vec = let nVec = V.slice i n vec in vecLift nVec
+mkSlice i n = vecLift . V.slice i n
