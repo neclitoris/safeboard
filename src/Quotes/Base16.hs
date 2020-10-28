@@ -12,4 +12,4 @@ base16 :: (Storable a, Lift a) => String -> TExpQ (V.Vector a)
 base16 s =
   case parseBase16 s of
     Left err -> fail (show err)
-    Right vec -> [|| vec ||]
+    Right vec -> vecLift vec
