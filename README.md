@@ -27,13 +27,16 @@ Generated code:
 ```
 GHCi> expr <- runQ $ unTypeQ (base64 "ZXhhbX BsZQ==" :: TExpQ (Vector Word8))
 GHCi> putStrLn $ pprint expr
-Data.Vector.Storable.fromList [101, 120, 97, 109, 112, 108, 101]
+GHC.IO.Unsafe.unsafePerformIO GHC.Base.$ (do {ptr_0 <- GHC.ForeignPtr.newForeignPtr_ (GHC.Ptr.Ptr "<binary data>");
+                                              GHC.Base.return GHC.Base.$ Data.Vector.Storable.unsafeFromForeignPtr ptr_0 0 7})
 ```
+
+This looks scary, but the resulting vector simply points to data in the compiled binary, so there is no runtime overhead.
 
 Slices:
 ```
-GHCi> let mple = mkSlice 3 4 vec
-GHCi> expr <- runQ $ unTypeQ mple
-GHCi> putStrLn $ pprint expr
-Data.Vector.Storable.fromList [109, 112, 108, 101]
+GHCi> $$(mkSlice 3 4 vec)
+[109, 112, 108, 101]
 ```
+
+Generates another vector in the binary just for kicks. `Data.Vector.Storable.slice` doesn't do that and is also O(1).
