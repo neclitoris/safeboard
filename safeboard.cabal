@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 812febdef6d32574c38c9db0dbf20c73aa365d4a1c808179490a698d2da84d8f
+-- hash: b93c614df4ee63e57a68cc36cb37ec65761afef993b22d05edaf3c7b303f5ba8
 
 name:           safeboard
 version:        0.1.0.0
@@ -34,7 +34,7 @@ library
     , parsec >=3.1 && <4
     , tasty >=1.3 && <2
     , tasty-hunit >=0.10 && <1
-    , template-haskell >=2.15 && <3
+    , template-haskell >=2.16 && <3
     , th-test-utils >=1.1 && <2
     , vector >=0.12 && <1
   default-language: Haskell2010
@@ -54,7 +54,7 @@ test-suite safeboard-test
     , safeboard
     , tasty >=1.3 && <2
     , tasty-hunit >=0.10 && <1
-    , template-haskell >=2.15 && <3
+    , template-haskell >=2.16 && <3
     , th-test-utils >=1.1 && <2
     , vector >=0.12 && <1
   default-language: Haskell2010

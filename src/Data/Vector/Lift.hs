@@ -17,6 +17,5 @@ vecLift v = unsafeTExpCoerce [|
     return $ V.unsafeFromForeignPtr ptr offset length
   |]
   where
-    bytes = litE $ StringPrimL $ V.toList $ (V.unsafeCast v :: V.Vector Word8)
-    offset = 0 :: Int
-    length = V.length v
+    (ptr, offset, length) = V.unsafeToForeignPtr $ V.unsafeCast v
+    bytes = litE $ bytesPrimL $ mkBytes ptr (fromIntegral offset) (fromIntegral length)
